@@ -139,14 +139,14 @@ class GcodeCombine
 end	
 
 
-c = GcodeCombine.new
-c.head="start.gcode"
-c.tail="end.gcode"
-c.file("1.gcode",0.7)
-c.file("2.gcode",0.8)
-c.file("3.gcode",0.9)
+#c = GcodeCombine.new
+#c.head="start.gcode"
+#c.tail="end.gcode"
+#c.file("1.gcode",0.7)
+#c.file("2.gcode",0.8)
+#c.file("3.gcode",0.9)
 
-f=File.open("output.gcode","w")
-f.puts c.output
-f.close
+#f=File.open("output.gcode","w")
+#f.puts c.output
+#f.close
 
