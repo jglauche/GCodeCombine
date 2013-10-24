@@ -38,8 +38,22 @@ perimeter_values.each do |width|
 	system([executable, "--load ",config_file, options, filename+".stl"].join(" "))
 	FileUtils.mv(filename+".gcode",["./gcode/",width, ".gcode"].join("")) 	
 end
-puts "Test prints sliced"
+puts "Test prints sliced, combining!"
 
+g = GcodeCombine.new
+g.head="start.gcode"
+g.tail="end.gcode"
+g.stl_size = [25+2,6+2] # TODO: this should be gathered by slic3r.pl --info
+perimeter_values.each do |width|
+	g.file(["./gcode/",width, ".gcode"].join(""),width)
+end
+
+f=File.open("output.gcode","w")
+f.puts g.output
+f.close
+puts "Calibration print prepared. Load output.gcode and hit print!"
+puts "Perimeter extrusion width for each part:"
+g.print_grid
 
 
 

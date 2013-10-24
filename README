@@ -1,0 +1,19 @@
+README
+---------------
+
+Toolset for slic3r extrusion width calibration.
+
+Workflow:
+1. print out a (or two if it gets too hot) single wall calibration cubes
+2. measure each wall width with calipers, from the top of the object
+3. create start.gcode and end.gcode (see below)
+4. calibrate.rb will use perimeter_width_test.stl to try out the values in between the range of values and use the best looking one
+
+ 
+
+start.gcode && end.gcode
+------------------------------
+(this could be easily done automagically)
+
+start.gcode should contain all gcode before the first Z lift (G1 Z...) 
+end.gcode should contain all gcode starting with M104 S0 or M140 S0

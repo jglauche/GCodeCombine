@@ -17,6 +17,7 @@
 
 
 class GcodeCombine
+	attr_accessor :stl_size
 	def initialize
 		@stl_size = [40,40] # for later
 		@bed_size = [100,180] # for later
@@ -111,10 +112,22 @@ class GcodeCombine
 			end
 			@grid << [pos_x,pos_y]		
 		end			
+	end
+
+	def print_grid
+		return if @grid == nil
+		y = @grid.first[1]
+		str = []
+		@grid.each_with_index do |grid, i|
+			if y != grid[1]
+				puts str.join(" ")
+				str = []	
+				y = grid[1]		
+			end
+			str << @settings[i]
+		end
+		puts str.join(" ") unless str.size == 0
 		
-#		(bed_x/x).times do |pos_x|
-#			 @grid << [pos_x*x,0]
-#		end		
 	end
 
 	def offset(gcode,grid_position)
